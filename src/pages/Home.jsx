@@ -2,6 +2,7 @@ import Slides from "../layout/Slides";
 import Categories from "../layout/Categories";
 import Promotion from "../layout/Promotion";
 import FeaturedProducts from "./../layout/FeaturedProducts";
+import Features from "../layout/Features";
 
 const Home = (props) => {
 	return (
@@ -10,6 +11,7 @@ const Home = (props) => {
 			<Categories />
 			<FeaturedProducts />
 			<Promotion />
+			<Features />
 		</>
 	);
 };

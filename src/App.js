@@ -33,3 +33,9 @@ function App() {
 }
 
 export default App;
+
+// update fonts
+// update slider dots and navigators
+// update footer columns, spacing,
+// mnimize fontsize of promotion headings
+// update product heading hover

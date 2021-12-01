@@ -103,6 +103,94 @@ const FeaturedProducts = (props) => {
 						</Link>
 						<p className="block text-lg font-normal text-gray-600">$150.00</p>
 					</div>
+					<div className="group">
+						<figure className="relative mb-2 h-80 sm:h-auto">
+							<img
+								src={product1}
+								className="object-cover w-full h-full transition-all filter brightness-100 group-hover:brightness-75"
+								alt="product name"
+							/>
+							<div className="absolute inset-0 overflow-hidden">
+								<div className="absolute transition-transform transform scale-0 top-5 right-5 group-hover:scale-105">
+									<FontAwesomeIcon icon={faHeart} className="text-xl" />
+									{/* <FontAwesomeIcon icon={faHeartEmpty} className="text-xl" /> */}
+								</div>
+								<div className="absolute invisible w-full text-center transition-all transform translate-y-full opacity-0 bottom-5 group-hover:translate-y-0 group-hover:visible group-hover:opacity-100">
+									<Button roundedBlack>Add to Cart</Button>
+								</div>
+							</div>
+						</figure>
+						<Link to="/product" className="block mb-1 text-lg font-semibold text-gray-600">
+							Product Name
+						</Link>
+						<p className="block text-lg font-normal text-gray-600">$150.00</p>
+					</div>
+					<div className="group">
+						<figure className="relative mb-2 h-80 sm:h-auto">
+							<img
+								src={product2}
+								className="object-cover w-full h-full transition-all filter brightness-100 group-hover:brightness-75"
+								alt="product name"
+							/>
+							<div className="absolute inset-0 overflow-hidden">
+								<div className="absolute transition-transform transform scale-0 top-5 right-5 group-hover:scale-105">
+									<FontAwesomeIcon icon={faHeart} className="text-xl" />
+									{/* <FontAwesomeIcon icon={faHeartEmpty} className="text-xl" /> */}
+								</div>
+								<div className="absolute invisible w-full text-center transition-all transform translate-y-full opacity-0 bottom-5 group-hover:translate-y-0 group-hover:visible group-hover:opacity-100">
+									<Button roundedBlack>Add to Cart</Button>
+								</div>
+							</div>
+						</figure>
+						<Link to="/product" className="block mb-1 text-lg font-semibold text-gray-600">
+							Product Name
+						</Link>
+						<p className="block text-lg font-normal text-gray-600">$150.00</p>
+					</div>
+					<div className="group">
+						<figure className="relative mb-2 h-80 sm:h-auto">
+							<img
+								src={product3}
+								className="object-cover w-full h-full transition-all filter brightness-100 group-hover:brightness-75"
+								alt="product name"
+							/>
+							<div className="absolute inset-0 overflow-hidden">
+								<div className="absolute transition-transform transform scale-0 top-5 right-5 group-hover:scale-105">
+									<FontAwesomeIcon icon={faHeart} className="text-xl" />
+									{/* <FontAwesomeIcon icon={faHeartEmpty} className="text-xl" /> */}
+								</div>
+								<div className="absolute invisible w-full text-center transition-all transform translate-y-full opacity-0 bottom-5 group-hover:translate-y-0 group-hover:visible group-hover:opacity-100">
+									<Button roundedBlack>Add to Cart</Button>
+								</div>
+							</div>
+						</figure>
+						<Link to="/product" className="block mb-1 text-lg font-semibold text-gray-600">
+							Product Name
+						</Link>
+						<p className="block text-lg font-normal text-gray-600">$150.00</p>
+					</div>
+					<div className="group">
+						<figure className="relative mb-2 h-80 sm:h-auto">
+							<img
+								src={product4}
+								className="object-cover w-full h-full transition-all filter brightness-100 group-hover:brightness-75"
+								alt="product name"
+							/>
+							<div className="absolute inset-0 overflow-hidden">
+								<div className="absolute transition-transform transform scale-0 top-5 right-5 group-hover:scale-105">
+									<FontAwesomeIcon icon={faHeart} className="text-xl" />
+									{/* <FontAwesomeIcon icon={faHeartEmpty} className="text-xl" /> */}
+								</div>
+								<div className="absolute invisible w-full text-center transition-all transform translate-y-full opacity-0 bottom-5 group-hover:translate-y-0 group-hover:visible group-hover:opacity-100">
+									<Button roundedBlack>Add to Cart</Button>
+								</div>
+							</div>
+						</figure>
+						<Link to="/product" className="block mb-1 text-lg font-semibold text-gray-600">
+							Product Name
+						</Link>
+						<p className="block text-lg font-normal text-gray-600">$150.00</p>
+					</div>
 				</div>
 			</div>
 		</section>
