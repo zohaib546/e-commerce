@@ -83,7 +83,7 @@ const MainNavigation = (props) => {
 						<div className="relative cursor-pointer">
 							<Link to="/cart">
 								<FontAwesomeIcon icon={faShoppingCart} className="text-lg" />
-								<span className="absolute flex items-center justify-center w-6 h-6 text-xs text-white border-2 border-white border-solid rounded-full bg-primary -top-3 -right-4">
+								<span className="absolute flex items-center justify-center font-bold text-white border-2 border-white border-solid rounded-full w-7 h-7 text-xxs bg-primary -top-4 -right-5">
 									50
 								</span>
 							</Link>

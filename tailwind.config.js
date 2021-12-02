@@ -3,11 +3,18 @@ module.exports = {
 	darkMode: false, // or 'media' or 'class'
 	theme: {
 		extend: {
+			fontFamily: {
+				montserrat: ["Montserrat", "sans-serif"],
+			},
+			fontSize: {
+				xxs: "10px",
+			},
 			backgroundImage: {
 				promotion: "url('/src/assets/images/promotion-bg.png')",
 			},
 			colors: {
 				primary: "#e65540",
+				secondary: "#66a8a6",
 			},
 			spacing: {
 				67: "67px",
@@ -22,5 +29,5 @@ module.exports = {
 			brightness: ["group-hover"],
 		},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/line-clamp")],
 };

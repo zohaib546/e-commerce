@@ -13,7 +13,7 @@ const Footer = () => {
 	return (
 		<footer className="py-20 bg-gray-100 footer">
 			<div className="container mx-auto ">
-				<div className="grid gap-8 mx-10 mb-8 lg:grid-cols-2 xl:grid-cols-4 xl:justify-items-center">
+				<div className="grid gap-8 mx-10 mb-8 lg:grid-cols-2 xl:grid-cols-3 xl:justify-items-stretch">
 					<div>
 						<h3 className="mb-2 text-xl font-semibold uppercase">Get in Touch</h3>
 						<p className="mb-2 font-normal">
@@ -63,56 +63,61 @@ const Footer = () => {
 							</li>
 						</ul>
 					</div>
-					<div>
-						<h3 className="mb-2 text-xl font-semibold uppercase">Categories</h3>
-						<ul className="space-y-1">
-							<li>
-								<Link to="#" className="text-sm transition-colors transform hover:text-primary">
-									Men
-								</Link>
-							</li>
-							<li>
-								<Link to="#" className="text-sm transition-colors transform hover:text-primary">
-									Women
-								</Link>
-							</li>
-							<li>
-								<Link to="#" className="text-sm transition-colors transform hover:text-primary">
-									Dresses
-								</Link>
-							</li>
-							<li>
-								<Link to="#" className="text-sm transition-colors transform hover:text-primary">
-									Sunglasses
-								</Link>
-							</li>
-						</ul>
+
+					<div className="grid gap-8 lg:grid-cols-2 justify-items-stretch">
+						<div>
+							<h3 className="mb-2 text-xl font-semibold uppercase">Categories</h3>
+							<ul className="space-y-1">
+								<li>
+									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
+										Men
+									</Link>
+								</li>
+								<li>
+									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
+										Women
+									</Link>
+								</li>
+								<li>
+									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
+										Dresses
+									</Link>
+								</li>
+								<li>
+									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
+										Sunglasses
+									</Link>
+								</li>
+							</ul>
+						</div>
+
+						<div>
+							<h3 className="mb-2 text-xl font-semibold uppercase">Links</h3>
+							<ul className="space-y-1">
+								<li>
+									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
+										Search
+									</Link>
+								</li>
+								<li>
+									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
+										About Us
+									</Link>
+								</li>
+								<li>
+									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
+										Contact Us
+									</Link>
+								</li>
+								<li>
+									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
+										Returns
+									</Link>
+								</li>
+							</ul>
+						</div>
 					</div>
-					<div>
-						<h3 className="mb-2 text-xl font-semibold uppercase">Links</h3>
-						<ul className="space-y-1">
-							<li>
-								<Link to="#" className="text-sm transition-colors transform hover:text-primary">
-									Search
-								</Link>
-							</li>
-							<li>
-								<Link to="#" className="text-sm transition-colors transform hover:text-primary">
-									About Us
-								</Link>
-							</li>
-							<li>
-								<Link to="#" className="text-sm transition-colors transform hover:text-primary">
-									Contact Us
-								</Link>
-							</li>
-							<li>
-								<Link to="#" className="text-sm transition-colors transform hover:text-primary">
-									Returns
-								</Link>
-							</li>
-						</ul>
-					</div>
+
 					<div>
 						<h3 className="mb-2 text-xl font-semibold uppercase">Newsletter</h3>
 						<form className="">

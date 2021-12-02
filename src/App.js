@@ -10,32 +10,35 @@ import Signup from "./pages/Signup";
 import Cart from "./pages/Cart";
 import Layout from "./layout/Layout";
 import NotFound from "./layout/NotFound";
+import Product from "./components/product/Product";
+import Category from "./components/category/Category";
 
 function App() {
 	return (
-		<Layout>
-			<Routes>
-				<Route path="/">
-					<Route index element={<Home />} />
-					<Route path="shop" element={<Shop />} />
-					<Route path="sale" element={<Sale />} />
-					<Route path="features" element={<Features />} />
-					<Route path="about" element={<About />} />
-					<Route path="contact" element={<Contact />} />
-					<Route path="login" element={<Login />} />
-					<Route path="signup" element={<Signup />} />
-					<Route path="cart" element={<Cart />} />
-					<Route path="*" element={<NotFound />} />
+		<Routes>
+			<Route path="/" element={<Layout />}>
+				<Route index element={<Home />} />
+				<Route path="product">
+					<Route path=":productId" element={<Product />} />
 				</Route>
-			</Routes>
-		</Layout>
+				<Route path="category">
+					<Route path=":categoryName" element={<Category />} />
+				</Route>
+				<Route path="shop" element={<Shop />} />
+				<Route path="sale" element={<Sale />} />
+				<Route path="features" element={<Features />} />
+				<Route path="about" element={<About />} />
+				<Route path="contact" element={<Contact />} />
+				<Route path="login" element={<Login />} />
+				<Route path="signup" element={<Signup />} />
+				<Route path="cart" element={<Cart />} />
+				<Route path="*" element={<NotFound />} />
+			</Route>
+		</Routes>
 	);
 }
 
 export default App;
 
-// update fonts
-// update slider dots and navigators
-// update footer columns, spacing,
-// mnimize fontsize of promotion headings
-// update product heading hover
+// review max course
+// continue product page

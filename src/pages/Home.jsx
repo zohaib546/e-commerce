@@ -1,5 +1,5 @@
 import Slides from "../layout/Slides";
-import Categories from "../layout/Categories";
+import Categories from "../layout/FeaturedCategories";
 import Promotion from "../layout/Promotion";
 import FeaturedProducts from "./../layout/FeaturedProducts";
 import Features from "../layout/Features";
