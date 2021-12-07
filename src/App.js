@@ -2,9 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import Sale from "./pages/Sale";
-import Shop from "./pages/Shop";
-import Features from "./pages/Features";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Cart from "./pages/Cart";
@@ -12,6 +9,8 @@ import Layout from "./layout/Layout";
 import NotFound from "./layout/NotFound";
 import Product from "./components/product/Product";
 import Category from "./components/category/Category";
+import AllCategories from "./pages/AllCategories";
+import AllProducts from "./pages/AllProducts";
 
 function App() {
 	return (
@@ -21,12 +20,11 @@ function App() {
 				<Route path="product">
 					<Route path=":productId" element={<Product />} />
 				</Route>
-				<Route path="category">
-					<Route path=":categoryName" element={<Category />} />
+				<Route path=":categoryName">
+					<Route path="products" element={<Category />} />
 				</Route>
-				<Route path="shop" element={<Shop />} />
-				<Route path="sale" element={<Sale />} />
-				<Route path="features" element={<Features />} />
+				<Route path="categories" element={<AllCategories />} />
+				<Route path="products" element={<AllProducts />} />
 				<Route path="about" element={<About />} />
 				<Route path="contact" element={<Contact />} />
 				<Route path="login" element={<Login />} />
@@ -40,5 +38,7 @@ function App() {
 
 export default App;
 
-// review max course
-// continue product page
+// resolve slides issue
+// max course review
+// start redux docs
+// finish other e-commerce pages

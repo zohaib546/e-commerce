@@ -41,18 +41,13 @@ const MainNavigation = (props) => {
 								</NavLink>
 							</li>
 							<li className="">
-								<NavLink to="/shop" className={({ isActive }) => isActiveStyles(isActive)}>
-									Shop
+								<NavLink to="/categories" className={({ isActive }) => isActiveStyles(isActive)}>
+									Categories
 								</NavLink>
 							</li>
 							<li className="">
-								<NavLink to="/sale" className={({ isActive }) => isActiveStyles(isActive)}>
-									Sale
-								</NavLink>
-							</li>
-							<li className="">
-								<NavLink to="/features" className={({ isActive }) => isActiveStyles(isActive)}>
-									Features
+								<NavLink to="/products" className={({ isActive }) => isActiveStyles(isActive)}>
+									Products
 								</NavLink>
 							</li>
 							<li className="">

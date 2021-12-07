@@ -17,7 +17,7 @@ const FeaturedCategories = () => {
 							key={category}
 							figure={DUMMY_CATEOGRY_IMAGES[index]}
 							title={category}
-							url={`category/${category}`}
+							url={`${category}/products`}
 						/>
 					))}
 				</div>

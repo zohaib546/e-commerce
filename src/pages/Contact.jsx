@@ -1,5 +1,7 @@
+import Banner from "./../components/UI/Banner";
+
 const Contact = (props) => {
-	return <h1>Contact</h1>;
+	return <Banner background="bg-banner2">Contact</Banner>;
 };
 
 export default Contact;

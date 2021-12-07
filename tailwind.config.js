@@ -11,6 +11,8 @@ module.exports = {
 			},
 			backgroundImage: {
 				promotion: "url('/src/assets/images/promotion-bg.png')",
+				banner1: "url('/src/assets/images/banner-1.webp')",
+				banner2: "url('/src/assets/images/banner-2.jpg')",
 			},
 			colors: {
 				primary: "#e65540",
@@ -18,6 +20,9 @@ module.exports = {
 			},
 			spacing: {
 				67: "67px",
+			},
+			gridTemplateColumns: {
+				"container-layout": "300px 1fr",
 			},
 		},
 	},
@@ -29,5 +34,5 @@ module.exports = {
 			brightness: ["group-hover"],
 		},
 	},
-	plugins: [require("@tailwindcss/line-clamp")],
+	plugins: [require("@tailwindcss/line-clamp"), require("@tailwindcss/forms")],
 };

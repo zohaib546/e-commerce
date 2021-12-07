@@ -1,8 +1,7 @@
-import Slides from "../layout/Slides";
-import Categories from "../layout/FeaturedCategories";
-import Promotion from "../layout/Promotion";
-import FeaturedProducts from "./../layout/FeaturedProducts";
-import Features from "../layout/Features";
+import ProductCard from "../components/product/ProductCard";
+import ProductHeader from "../components/product/ProductHeader";
+import SidebarCard from "../components/sidebar/SidebarCard";
+import Pagination from "../components/UI/Pagination";
 import product1 from "../assets/images/product-1.webp";
 import product2 from "../assets/images/product-2.webp";
 import product3 from "../assets/images/product-3.webp";
@@ -87,32 +86,6 @@ const DUMMY_PRODUCTS = [
 			count: 70,
 		},
 	},
-	{
-		id: 7,
-		title: "White Gold Plated Princess",
-		price: 9.99,
-		description:
-			"Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...",
-		category: "jewelery",
-		image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
-		rating: {
-			rate: 3,
-			count: 400,
-		},
-	},
-	{
-		id: 8,
-		title: "Pierced Owl Rose Gold Plated Stainless Steel Double",
-		price: 10.99,
-		description:
-			"Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel",
-		category: "jewelery",
-		image: "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-		rating: {
-			rate: 1.9,
-			count: 100,
-		},
-	},
 ];
 
 const DUMMY_IMAGES = [
@@ -126,16 +99,36 @@ const DUMMY_IMAGES = [
 	product4,
 ];
 
-const Home = (props) => {
+const Main = (props) => {
 	return (
-		<>
-			<Slides />
-			<Categories />
-			<FeaturedProducts images={DUMMY_IMAGES} products={DUMMY_PRODUCTS} />
-			<Promotion />
-			<Features />
-		</>
+		<div className="py-20 mx-5 lg:mx-auto lg:container">
+			<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-container-layout">
+				<aside className="sidebar">
+					<SidebarCard />
+					<SidebarCard className="mt-8" />
+				</aside>
+				<main className="main-content">
+					<header className="main-content-header">
+						<ProductHeader />
+					</header>
+					<section className="grid gap-6 my-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+						{DUMMY_PRODUCTS.map((product, index) => (
+							<ProductCard
+								key={product.id}
+								figure={DUMMY_IMAGES[index]}
+								path={`../product/${product.id}`}
+								title={product.title}
+								price={product.price}
+							/>
+						))}
+					</section>
+					<footer className="main-content-footer">
+						<Pagination />
+					</footer>
+				</main>
+			</div>
+		</div>
 	);
 };
 
-export default Home;
+export default Main;

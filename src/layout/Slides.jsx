@@ -1,11 +1,11 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronCircleRight, faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import cover1 from "../assets/images/cover-1.webp";
 import cover2 from "../assets/images/cover-2.webp";
 import cover3 from "../assets/images/cover-3.webp";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronCircleRight, faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
 const settings = {
 	arrows: true,
@@ -26,7 +26,7 @@ const settings = {
 const Slides = () => {
 	return (
 		<section className="mb-8 hero">
-			{/* <Slider {...settings}>
+			<Slider {...settings}>
 				<div className="relative">
 					<img className="object-cover w-full h-72 sm:h-auto" src={cover1} alt="women with jeans" />
 					<div className="absolute text-center text-white transform -translate-x-1/2 bottom-14 left-1/2">
@@ -63,7 +63,7 @@ const Slides = () => {
 						</button>
 					</div>
 				</div>
-			</Slider> */}
+			</Slider>
 		</section>
 	);
 };

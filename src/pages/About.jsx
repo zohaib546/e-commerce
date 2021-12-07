@@ -1,5 +1,7 @@
+import Banner from "../components/UI/Banner";
+
 const About = (props) => {
-	return <h1>About</h1>;
+	return <Banner background="bg-banner2">About</Banner>;
 };
 
 export default About;
