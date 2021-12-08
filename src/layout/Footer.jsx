@@ -8,6 +8,7 @@ import {
 	faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import Button from "./../components/UI/Button";
+import Heading from "./../components/UI/Heading";
 
 const Footer = () => {
 	return (
@@ -15,7 +16,7 @@ const Footer = () => {
 			<div className="container mx-auto ">
 				<div className="grid gap-8 mx-10 mb-8 lg:grid-cols-2 xl:grid-cols-3 xl:justify-items-stretch">
 					<div>
-						<h3 className="mb-2 text-xl font-semibold uppercase">Get in Touch</h3>
+						<Heading subheadingBlack>Newsletter</Heading>
 						<p className="mb-2 font-normal">
 							Any questions? Let us know in store at 8th floor, 379 ABC St, XYZ, NY 10018 or call us
 							on (+1) 96 123 4567
@@ -66,7 +67,7 @@ const Footer = () => {
 
 					<div className="grid gap-8 lg:grid-cols-2 justify-items-stretch">
 						<div>
-							<h3 className="mb-2 text-xl font-semibold uppercase">Categories</h3>
+							<Heading subheadingBlack>Categories</Heading>
 							<ul className="space-y-1">
 								<li>
 									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
@@ -92,7 +93,7 @@ const Footer = () => {
 						</div>
 
 						<div>
-							<h3 className="mb-2 text-xl font-semibold uppercase">Links</h3>
+							<Heading subheadingBlack>Links</Heading>
 							<ul className="space-y-1">
 								<li>
 									<Link to="#" className="text-sm transition-colors transform hover:text-primary">
@@ -119,12 +120,12 @@ const Footer = () => {
 					</div>
 
 					<div>
-						<h3 className="mb-2 text-xl font-semibold uppercase">Newsletter</h3>
+						<Heading subheadingBlack>Newsletter</Heading>
 						<form className="">
 							<input
 								type="text"
 								placeholder="email@example.com"
-								className="block w-full p-2 mb-6 bg-transparent border-0 border-b-2 border-gray-500 focus:outline-none focus:border-primary"
+								className="block w-full p-2 mb-6 bg-transparent border-0 border-b-2 border-gray-500 focus:outline-none focus:border-primary focus:ring-0"
 							/>
 							<Button roundedBlack>Subscribe</Button>
 						</form>

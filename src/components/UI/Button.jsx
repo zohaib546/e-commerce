@@ -32,6 +32,32 @@ const Button = (props) => {
 			</button>
 		);
 
+	if (props.roundedPrimary)
+		return (
+			<button className="px-4 py-2 text-xs font-light text-white uppercase transition-all shadow-xl bg-primary sm:text-base sm:py-3 sm:px-9 rounded-3xl ">
+				{props.children}
+			</button>
+		);
+
+	if (props.outlinedWhite) {
+		return (
+			<button
+				onClick={props.onClick}
+				className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black border border-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:bg-primary hover:border-white"
+			>
+				{props.children}
+			</button>
+		);
+	}
+
+	if (props.outlinedBlack) {
+		return (
+			<button className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black border border-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:bg-white hover:border-black hover:text-black">
+				{props.children}
+			</button>
+		);
+	}
+
 	return "no prop found for this element";
 };
 

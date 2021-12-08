@@ -70,8 +70,8 @@ const MainNavigation = (props) => {
 								</NavLink>
 							</li>
 							<li className="">
-								<NavLink to="/signup" className={({ isActive }) => isActiveStyles(isActive)}>
-									Signup
+								<NavLink to="/register" className={({ isActive }) => isActiveStyles(isActive)}>
+									Register
 								</NavLink>
 							</li>
 						</ul>

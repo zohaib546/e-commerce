@@ -27,29 +27,28 @@
 		z-index: 5;
 	}
 
-	.hero .slick-prev,
-	.hero .slick-next {
-		width: 30px;
-		height: 30px;
-		@apply text-black text-opacity-50 opacity-0;
-		transition: all 0.16s;
-	}
-
-	.hero .slick-prev:hover,
-	.hero .slick-next:hover {
-		@apply text-primary text-opacity-60;
-	}
-
-	.hero:hover .slick-prev,
-	.hero:hover .slick-next {
-		@apply opacity-100;
-	}
-
 	.hero .slick-dots {
 		bottom: 25px;
 	}
 
 	.hero .slick-dots li.slick-active button:before {
 		@apply text-primary;
+	}
+
+	.hero .slick-next:before,
+	.hero .slick-prev:before {
+		@apply text-black text-opacity-50 opacity-0;
+		font-size: 30px;
+		transition: all 0.2s;
+	}
+
+	.hero:hover .slick-prev:before,
+	.hero:hover .slick-next:before {
+		@apply opacity-100;
+	}
+
+	.hero .slick-prev:hover:before,
+	.hero .slick-next:hover:before {
+		@apply text-primary text-opacity-60;
 	}
 }
