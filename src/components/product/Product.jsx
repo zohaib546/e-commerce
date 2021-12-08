@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import product from "../../assets/images/product-1.webp";
 import Button from "./../UI/Button";
 import QuantityButton from "./../UI/QuantityButton";
@@ -10,6 +11,8 @@ import product1 from "../../assets/images/product-1.webp";
 import product2 from "../../assets/images/product-2.webp";
 import product3 from "../../assets/images/product-3.webp";
 import product4 from "../../assets/images/product-4.webp";
+
+import { addToCart, removeFromCart } from "../../store/cartSlice";
 
 const DUMMY_PRODUCTS = [
 	{
@@ -70,6 +73,17 @@ const DUMMY_IMAGES = [product1, product2, product3, product4];
 
 const Product = (props) => {
 	const params = useParams();
+	const products = useSelector((state) => state.cart.products);
+	const dispatch = useDispatch();
+
+	const handleAddToCart = () => {
+		dispatch(addToCart({ number: 1 }));
+	};
+
+	const handleRemoveFromCart = () => {
+		dispatch(removeFromCart({ payload: { number: 1 } }));
+	};
+
 	return (
 		<section className="py-10 single-product">
 			<div className="mx-5 mb-5 lg:container lg:mx-auto">
@@ -110,7 +124,9 @@ const Product = (props) => {
 							</div>
 							<div className="flex items-center justify-between py-3 space-x-2 ">
 								<QuantityButton />
-								<Button roundedBlack>Add to Cart</Button>
+								<Button roundedBlack onClick={handleAddToCart}>
+									Add to Cart
+								</Button>
 							</div>
 							<div className="pt-3">
 								<ProductReview />

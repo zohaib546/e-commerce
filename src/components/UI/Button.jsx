@@ -27,7 +27,10 @@ const Button = (props) => {
 
 	if (props.roundedBlack)
 		return (
-			<button className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:text-white hover:bg-primary">
+			<button
+				className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:text-white hover:bg-primary"
+				onClick={props.onClick}
+			>
 				{props.children}
 			</button>
 		);
