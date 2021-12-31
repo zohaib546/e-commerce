@@ -51,4 +51,40 @@
 	.hero .slick-next:hover:before {
 		@apply text-primary text-opacity-60;
 	}
+
+	.loader {
+		display: flex;
+		justify-content: center;
+	}
+
+	.loader-outer-circle {
+		width: 8rem;
+		height: 8rem;
+		border: 5px solid #66a8a6;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		border-color: #66a8a6 transparent #66a8a6 #66a8a6;
+		animation: animateCircular 1.2s linear infinite;
+	}
+
+	.loader-inner-circle {
+		position: relative;
+		width: 5rem;
+		height: 5rem;
+		border: 5px solid #e65540;
+		border-radius: 50%;
+		border-color: #e65540 #e65540 transparent #e65540;
+	}
+
+	@keyframes animateCircular {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
 }

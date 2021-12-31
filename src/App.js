@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
@@ -22,9 +22,10 @@ function App() {
 					<Route index element={<Home />} />
 					<Route path="product">
 						<Route path=":productId" element={<Product />} />
+						<Route path="" element={<Navigate to="/notfound" replace={true} />} />
 					</Route>
-					<Route path=":categoryName">
-						<Route path="products" element={<Category />} />
+					<Route path="category">
+						<Route path=":categoryName" element={<Category />} />
 					</Route>
 					<Route path="categories" element={<AllCategories />} />
 					<Route path="products" element={<AllProducts />} />
@@ -35,7 +36,8 @@ function App() {
 					<Route path="cart" element={<Cart />} />
 					<Route path="checkout" element={<Checkout />} />
 					<Route path="confirmation" element={<Confirmation />} />
-					<Route path="*" element={<NotFound />} />
+					<Route path="/notfound" element={<NotFound />} />
+					<Route path="*" element={<Navigate to="/notfound" replace={true} />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
@@ -45,6 +47,8 @@ function App() {
 export default App;
 
 // max course review
-// start redux docs
 // reusable components proptypes refactor
 // pending pages (checkout, confirmation)
+
+// add to cart
+// wishlist

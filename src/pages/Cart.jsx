@@ -5,9 +5,21 @@ import QuantityButton from "./../components/UI/QuantityButton";
 import Button from "./../components/UI/Button";
 
 const Cart = (props) => {
+	const breadcrumbList = () => ({
+		firstPage: {
+			name: "Home",
+			location: "/",
+		},
+		lastPage: {
+			name: "Cart",
+		},
+	});
+
 	return (
 		<section className="cart">
-			<Banner background="bg-cart">Cart</Banner>
+			<Banner background="bg-cart" list={breadcrumbList()}>
+				Cart
+			</Banner>
 			<div className="container py-20 mx-auto overflow-auto">
 				<table className="mx-auto min-w-992">
 					<tbody>

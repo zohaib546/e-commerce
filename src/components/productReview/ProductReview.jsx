@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import productSlice from "../../store/productSlice";
 
 const ProductReview = (props) => {
 	return (
 		<div className="flex space-x-5">
 			<div className="px-10 py-5 text-center bg-gray-100 rounded-md shadow-md">
 				<h3 className="font-bold">Overall</h3>
-				<h2 className="mb-1 text-5xl font-bold text-primary">5.0</h2>
-				<p className="text-sm">( 03 Reviews )</p>
+				<h2 className="mb-1 text-5xl font-bold text-primary">{props.rating.rate}</h2>
+				<p className="text-sm">( {props.rating.count} Reviews )</p>
 			</div>
 			<div className="">
 				<h3 className="font-bold ">Based on (#) Reviews</h3>

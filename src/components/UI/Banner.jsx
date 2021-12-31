@@ -9,7 +9,7 @@ const Banner = ({ background, ...props }) => {
 	return (
 		<div className={renderClasses()}>
 			<Heading white>{props.children}</Heading>
-			<BreadCrumb white />
+			<BreadCrumb white list={{ ...props.list }} />
 		</div>
 	);
 };
