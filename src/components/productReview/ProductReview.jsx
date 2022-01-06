@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import productSlice from "../../store/productSlice";
 
 const ProductReview = (props) => {
 	return (
-		<div className="flex space-x-5">
+		<div className="flex flex-col space-y-5 sm:flex-row sm:space-x-5 sm:space-y-5">
 			<div className="px-10 py-5 text-center bg-gray-100 rounded-md shadow-md">
 				<h3 className="font-bold">Overall</h3>
 				<h2 className="mb-1 text-5xl font-bold text-primary">{props.rating.rate}</h2>

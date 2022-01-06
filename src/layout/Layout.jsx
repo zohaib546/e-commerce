@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import MainNavigation from "./MainNavigation";
 import Footer from "./Footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const Layout = (props) => {
 	return (
@@ -10,6 +12,7 @@ const Layout = (props) => {
 				<Outlet />
 			</main>
 			<Footer />
+			<ToastContainer />
 		</div>
 	);
 };

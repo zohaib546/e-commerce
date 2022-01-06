@@ -14,6 +14,7 @@ const productSlice = createSlice({
 		},
 		productsReceieved: (products, action) => {
 			products.loading = false;
+			products.error = null;
 			products.items = action.payload.data;
 		},
 		productsRequestFailed: (products, action) => {

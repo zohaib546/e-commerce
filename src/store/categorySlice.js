@@ -14,6 +14,7 @@ const categorySlice = createSlice({
 		},
 		categoriesReceived: (categories, action) => {
 			categories.loading = false;
+			categories.error = null;
 			categories.items = action.payload.data;
 		},
 		categoriesRequestFailed: (categories, action) => {

@@ -1,8 +1,15 @@
+import React from "react";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { fetchProductById } from "./../../store/productSlice";
-import { addToCart, removeFromCart } from "../../store/cartSlice";
+import { addedToCart } from "../../store/cartSlice";
+import {
+	addedToWishlist,
+	removedFromWishlist,
+	selectWishlistItem,
+} from "../../store/wishlistSlice";
 import Button from "./../UI/Button";
 import QuantityButton from "./../UI/QuantityButton";
 import WishlistButton from "./../UI/WishlistButton";
@@ -32,11 +39,12 @@ const DUMMY_IMAGES = [
 ];
 
 const Product = (props) => {
+	const { productId } = useParams();
 	const [loading, setLoading] = useState(false);
 	const [product, setProduct] = useState({});
 	const [error, setError] = useState();
-	const { productId } = useParams();
-	const navigate = useNavigate();
+	const [quantity, setQuantity] = useState(0);
+	const isInWishlist = useSelector((state) => selectWishlistItem(state, Number(productId)));
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -51,8 +59,6 @@ const Product = (props) => {
 					setLoading(false);
 					setError(errorMessage);
 				});
-		} else {
-			navigate("/notfound");
 		}
 	}, [dispatch, productId]);
 
@@ -71,11 +77,48 @@ const Product = (props) => {
 	});
 
 	const handleAddToCart = () => {
-		dispatch(addToCart({ number: 1 }));
+		if (quantity > 0) {
+			const cartItem = {
+				id: product.id,
+				title: product.title,
+				price: product.price,
+				imageId: product.id,
+				quantity,
+			};
+
+			dispatch(addedToCart({ cartItem }));
+		} else {
+			toast.warn("Item quantity must be atleast 1", {
+				position: toast.POSITION.TOP_RIGHT,
+				className: "top-16",
+				theme: "dark",
+			});
+		}
 	};
 
-	const handleRemoveFromCart = () => {
-		dispatch(removeFromCart({ payload: { number: 1 } }));
+	const handleToggleWishlist = (isAddedInWishlist) => {
+		if (isAddedInWishlist) {
+			const wishlistItem = {
+				id: product.id,
+				title: product.title,
+				price: product.price,
+				imageId: productId,
+			};
+			dispatch(addedToWishlist({ wishlistItem }));
+		} else {
+			dispatch(removedFromWishlist({ id: product.id }));
+		}
+	};
+
+	const handleAddQuantity = () => {
+		setQuantity((quantity) => (quantity += 1));
+	};
+
+	const handleRemoveQuantity = () => {
+		setQuantity((quantity) => {
+			if (quantity > 0) return (quantity -= 1);
+			return quantity;
+		});
 	};
 
 	if (loading)
@@ -88,7 +131,7 @@ const Product = (props) => {
 	if (!loading && error)
 		return (
 			<div className="max-w-2xl mx-auto pt-5">
-				<Alert title="Error" message={error} />
+				<Alert danger title="Error" message={error} />
 			</div>
 		);
 
@@ -120,7 +163,7 @@ const Product = (props) => {
 									</dl>
 								</div>
 								<div className="flex items-center py-3 space-x-2 ">
-									<WishlistButton />
+									<WishlistButton isActive={isInWishlist} onAddWishlist={handleToggleWishlist} />
 									<span className="text-sm">Add to wishlist</span>
 								</div>
 								<div className="py-3 space-y-1">
@@ -128,7 +171,11 @@ const Product = (props) => {
 									<p className="max-w-md font-medium text-gray-500">{product.description}</p>
 								</div>
 								<div className="flex items-center justify-between py-3 space-x-2 ">
-									<QuantityButton />
+									<QuantityButton
+										value={quantity}
+										onAddQuantity={handleAddQuantity}
+										onRemoveQuantity={handleRemoveQuantity}
+									/>
 									<Button roundedBlack onClick={handleAddToCart}>
 										Add to Cart
 									</Button>
@@ -153,4 +200,4 @@ const Product = (props) => {
 	);
 };
 
-export default Product;
+export default React.memo(Product);

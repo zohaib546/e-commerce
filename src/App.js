@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
+import Wishlist from "./pages/Wishlist";
 import Layout from "./layout/Layout";
 import NotFound from "./layout/NotFound";
 import Product from "./components/product/Product";
@@ -34,9 +35,10 @@ function App() {
 					<Route path="login" element={<Login />} />
 					<Route path="register" element={<Register />} />
 					<Route path="cart" element={<Cart />} />
+					<Route path="wishlist" element={<Wishlist />} />
 					<Route path="checkout" element={<Checkout />} />
 					<Route path="confirmation" element={<Confirmation />} />
-					<Route path="/notfound" element={<NotFound />} />
+					<Route path="notfound" element={<NotFound />} />
 					<Route path="*" element={<Navigate to="/notfound" replace={true} />} />
 				</Route>
 			</Routes>
@@ -49,6 +51,3 @@ export default App;
 // max course review
 // reusable components proptypes refactor
 // pending pages (checkout, confirmation)
-
-// add to cart
-// wishlist

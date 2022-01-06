@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 const Button = (props) => {
 	if (props.roundedWhite)
 		return (
-			<button className="px-4 py-2 text-xs font-light text-black uppercase transition-all bg-white shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:text-white hover:bg-primary">
+			<button
+				onClick={props.onClick}
+				className="px-4 py-2 text-xs font-light text-black uppercase transition-all bg-white shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:text-white hover:bg-primary"
+			>
 				{props.children}
 			</button>
 		);
@@ -12,6 +15,7 @@ const Button = (props) => {
 		return (
 			<Link
 				to={props.url}
+				onClick={props.onClick}
 				className="absolute px-3 py-2 text-xs font-light uppercase transition-all transform -translate-x-1/2 bg-white shadow-lg sm:px-5 sm:text-base lg:px-10 lg:py-3 hover:bg-primary hover:text-white bottom-5 left-1/2"
 			>
 				{props.children}
@@ -20,7 +24,10 @@ const Button = (props) => {
 
 	if (props.flatWhite)
 		return (
-			<button className="absolute px-3 py-2 text-xs font-light uppercase transition-all transform -translate-x-1/2 bg-white shadow-lg sm:px-5 sm:text-base lg:px-10 lg:py-3 hover:bg-primary hover:text-white bottom-5 left-1/2">
+			<button
+				onClick={props.onClick}
+				className="absolute px-3 py-2 text-xs font-light uppercase transition-all transform -translate-x-1/2 bg-white shadow-lg sm:px-5 sm:text-base lg:px-10 lg:py-3 hover:bg-primary hover:text-white bottom-5 left-1/2"
+			>
 				{props.children}
 			</button>
 		);
@@ -37,7 +44,10 @@ const Button = (props) => {
 
 	if (props.roundedPrimary)
 		return (
-			<button className="px-4 py-2 text-xs font-light text-white uppercase transition-all shadow-xl bg-primary sm:text-base sm:py-3 sm:px-9 rounded-3xl ">
+			<button
+				onClick={props.onClick}
+				className="px-4 py-2 text-xs font-light text-white uppercase transition-all shadow-xl bg-primary sm:text-base sm:py-3 sm:px-9 rounded-3xl "
+			>
 				{props.children}
 			</button>
 		);
@@ -55,7 +65,10 @@ const Button = (props) => {
 
 	if (props.outlinedBlack) {
 		return (
-			<button className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black border border-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:bg-white hover:border-black hover:text-black">
+			<button
+				onClick={props.onClick}
+				className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black border border-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:bg-white hover:border-black hover:text-black"
+			>
 				{props.children}
 			</button>
 		);

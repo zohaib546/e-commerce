@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/productSlice";
@@ -49,8 +50,9 @@ const FeaturedProducts = (props) => {
 				{products.map((product, index) => (
 					<ProductCard
 						key={product.id}
+						id={product.id}
 						figure={DUMMY_IMAGES[index]}
-						path={`product/${product.id}`}
+						path={`/product/${product.id}`}
 						title={product.title}
 						price={product.price}
 					/>
@@ -69,4 +71,4 @@ const FeaturedProducts = (props) => {
 	);
 };
 
-export default FeaturedProducts;
+export default React.memo(FeaturedProducts);

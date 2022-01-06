@@ -1,5 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addedToCart } from "../../store/cartSlice";
+import {
+	addedToWishlist,
+	removedFromWishlist,
+	selectWishlistItem,
+} from "../../store/wishlistSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartEmpty } from "@fortawesome/free-regular-svg-icons";
@@ -7,9 +14,43 @@ import Button from "../UI/Button";
 
 const ProductCard = (props) => {
 	const [isFavorite, setIsFavorite] = useState(false);
+	const isWishlistItem = useSelector((state) => selectWishlistItem(state, props.id));
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (isWishlistItem) {
+			setIsFavorite(true);
+		}
+	}, []);
 
 	const handleFavorite = () => {
-		setIsFavorite((prevState) => !prevState);
+		const wishlistItem = {
+			id: props.id,
+			title: props.title,
+			price: props.price,
+			imageId: props.id,
+		};
+
+		setIsFavorite((prevState) => {
+			if (!prevState) {
+				dispatch(addedToWishlist({ wishlistItem }));
+			} else {
+				dispatch(removedFromWishlist({ id: props.id }));
+			}
+			return !prevState;
+		});
+	};
+
+	const handleAddToCart = () => {
+		const cartItem = {
+			id: props.id,
+			title: props.title,
+			price: props.price,
+			imageId: props.id,
+			quantity: 1,
+		};
+
+		dispatch(addedToCart({ cartItem }));
 	};
 
 	return (
@@ -29,7 +70,9 @@ const ProductCard = (props) => {
 						{!isFavorite && <FontAwesomeIcon icon={faHeartEmpty} className="text-xl text-white" />}
 					</div>
 					<div className="absolute invisible w-full text-center transition-all transform translate-y-full opacity-0 bottom-5 group-hover:translate-y-0 group-hover:visible group-hover:opacity-100">
-						<Button roundedBlack>Add to Cart</Button>
+						<Button roundedBlack onClick={handleAddToCart}>
+							Add to Cart
+						</Button>
 					</div>
 				</div>
 			</figure>

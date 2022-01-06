@@ -4,7 +4,6 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const BreadCrumb = (props) => {
 	const list = props.list;
-	console.log(list);
 
 	let listClasses = `mr-2 text-xs ${
 		props.white ? "text-white" : "text-gray-500"
