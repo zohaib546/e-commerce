@@ -16,75 +16,73 @@
 	}
 }
 
-@layer components {
-	.hero .slick-prev {
-		left: 30px;
-		z-index: 5;
-	}
+.hero .slick-prev {
+	left: 30px;
+	z-index: 5;
+}
 
-	.hero .slick-next {
-		right: 30px;
-		z-index: 5;
-	}
+.hero .slick-next {
+	right: 30px;
+	z-index: 5;
+}
 
-	.hero .slick-dots {
-		bottom: 25px;
-	}
+.hero .slick-dots {
+	bottom: 25px;
+}
 
-	.hero .slick-dots li.slick-active button:before {
-		@apply text-primary;
-	}
+.hero .slick-dots li.slick-active button:before {
+	@apply text-primary;
+}
 
-	.hero .slick-next:before,
-	.hero .slick-prev:before {
-		@apply text-black text-opacity-50 opacity-0;
-		font-size: 30px;
-		transition: all 0.2s;
-	}
+.hero .slick-next:before,
+.hero .slick-prev:before {
+	@apply text-black text-opacity-50 opacity-0;
+	font-size: 30px;
+	transition: all 0.2s;
+}
 
-	.hero:hover .slick-prev:before,
-	.hero:hover .slick-next:before {
-		@apply opacity-100;
-	}
+.hero:hover .slick-prev:before,
+.hero:hover .slick-next:before {
+	@apply opacity-100;
+}
 
-	.hero .slick-prev:hover:before,
-	.hero .slick-next:hover:before {
-		@apply text-primary text-opacity-60;
-	}
+.hero .slick-prev:hover:before,
+.hero .slick-next:hover:before {
+	@apply text-primary text-opacity-60;
+}
 
-	.loader {
-		display: flex;
-		justify-content: center;
-	}
+.loader {
+	display: flex;
+	justify-content: center;
+}
 
-	.loader-outer-circle {
-		width: 8rem;
-		height: 8rem;
-		border: 5px solid #66a8a6;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		position: relative;
-		border-color: #66a8a6 transparent #66a8a6 #66a8a6;
-		animation: animateCircular 1.2s linear infinite;
-	}
+.loader-outer-circle {
+	width: 8rem;
+	height: 8rem;
+	border: 5px solid #66a8a6;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	border-color: #66a8a6 transparent #66a8a6 #66a8a6;
+	animation: animateCircular 1.2s linear infinite;
+}
 
-	.loader-inner-circle {
-		position: relative;
-		width: 5rem;
-		height: 5rem;
-		border: 5px solid #e65540;
-		border-radius: 50%;
-		border-color: #e65540 #e65540 transparent #e65540;
-	}
+.loader-inner-circle {
+	position: relative;
+	width: 5rem;
+	height: 5rem;
+	border: 5px solid #e65540;
+	border-radius: 50%;
+	border-color: #e65540 #e65540 transparent #e65540;
+}
 
-	@keyframes animateCircular {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
+@keyframes animateCircular {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
 	}
 }

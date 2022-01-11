@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
 	countTotalFromCart,
 	incrementItemQuantity,
@@ -7,28 +8,20 @@ import {
 import Banner from "../components/UI/Banner";
 import QuantityButton from "./../components/UI/QuantityButton";
 import Button from "./../components/UI/Button";
-import product1 from "../assets/images/product-1.webp";
-import product2 from "../assets/images/product-2.webp";
-import product3 from "../assets/images/product-3.webp";
-import product4 from "../assets/images/product-4.webp";
-import product5 from "../assets/images/product-5.webp";
-import product6 from "../assets/images/product-6.webp";
-import product7 from "../assets/images/product-7.webp";
-import product8 from "../assets/images/product-8.webp";
-import { Link } from "react-router-dom";
+import {itemImages} from "../utils/imageData";
 
-const DUMMY_IMAGES = [
-	product1,
-	product2,
-	product3,
-	product4,
-	product5,
-	product6,
-	product7,
-	product8,
-];
+const breadcrumbList = () => ({
+	firstPage: {
+		name: "Home",
+		location: "/",
+	},
+	lastPage: {
+		name: "Cart",
+	},
+});
 
 const Cart = (props) => {
+	let cartContent;
 	const cartItems = useSelector((state) => state.cart.items);
 	const cartTotal = useSelector(countTotalFromCart);
 	const dispatch = useDispatch();
@@ -40,18 +33,6 @@ const Cart = (props) => {
 	const handleRemoveQuantity = (itemId) => {
 		dispatch(decrementItemQuantity({ itemId }));
 	};
-
-	const breadcrumbList = () => ({
-		firstPage: {
-			name: "Home",
-			location: "/",
-		},
-		lastPage: {
-			name: "Cart",
-		},
-	});
-
-	let cartContent;
 
 	if (cartItems.length > 0) {
 		cartContent = (
@@ -73,12 +54,16 @@ const Cart = (props) => {
 								<h2>Total</h2>
 							</th>
 						</tr>
-						{cartItems.map((item) => (
+						{cartItems.map((item,index) => (
 							<tr key={item.id} className="border-b border-gray-300">
 								<td className="p-4 w-52">
 									<div>
 										<figure className="">
-											<img className="w-24" src={DUMMY_IMAGES[item.imageId - 1]} alt="product" />
+											<img
+												className="w-24"
+												src={itemImages[index].image}
+												alt={item.title}
+											/>
 										</figure>
 									</div>
 								</td>

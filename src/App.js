@@ -48,6 +48,7 @@ function App() {
 
 export default App;
 
+// https://e-commerce-zohaib546.netlify.app/
 // max course review
 // reusable components proptypes refactor
 // pending pages (checkout, confirmation)

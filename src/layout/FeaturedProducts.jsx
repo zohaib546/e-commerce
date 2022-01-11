@@ -6,25 +6,7 @@ import Heading from "../components/UI/Heading";
 import ProductCard from "./../components/product/ProductCard";
 import Alert from "./../components/UI/Alert";
 import Loader from "./../components/UI/Loader";
-import product1 from "../assets/images/product-1.webp";
-import product2 from "../assets/images/product-2.webp";
-import product3 from "../assets/images/product-3.webp";
-import product4 from "../assets/images/product-4.webp";
-import product5 from "../assets/images/product-5.webp";
-import product6 from "../assets/images/product-6.webp";
-import product7 from "../assets/images/product-7.webp";
-import product8 from "../assets/images/product-8.webp";
-
-const DUMMY_IMAGES = [
-	product1,
-	product2,
-	product3,
-	product4,
-	product5,
-	product6,
-	product7,
-	product8,
-];
+import { itemImages } from "../utils/imageData";
 
 const FeaturedProducts = (props) => {
 	const loading = useSelector((state) => state.products.loading);
@@ -51,7 +33,7 @@ const FeaturedProducts = (props) => {
 					<ProductCard
 						key={product.id}
 						id={product.id}
-						figure={DUMMY_IMAGES[index]}
+						figure={itemImages[index].image}
 						path={`/product/${product.id}`}
 						title={product.title}
 						price={product.price}

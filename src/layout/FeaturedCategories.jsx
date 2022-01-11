@@ -1,15 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../store/categorySlice";
+import { categoryImages } from "../utils/imageData";
 import Loader from "../components/UI/Loader";
 import Alert from "./../components/UI/Alert";
 import CategoryCard from "./../components/category/CategoryCard";
-import category1 from "../assets/images/category-1.webp";
-import category2 from "../assets/images/category-2.webp";
-import category3 from "../assets/images/category-3.webp";
-import category4 from "../assets/images/category-4.webp";
-
-const DUMMY_CATEOGRY_IMAGES = [category1, category2, category3, category4];
 
 const FeaturedCategories = () => {
 	const loading = useSelector((state) => state.categories.loading);
@@ -35,7 +30,7 @@ const FeaturedCategories = () => {
 				{categories.map((category, index) => (
 					<CategoryCard
 						key={category}
-						figure={DUMMY_CATEOGRY_IMAGES[index]}
+						figure={categoryImages[index].image}
 						title={category}
 						url={`/category/${category}`}
 					/>

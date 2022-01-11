@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Footer = (props) => {
+const Pagination = (props) => {
 	return (
 		<ul className="flex space-x-4">
 			<li>
@@ -31,4 +31,4 @@ const Footer = (props) => {
 	);
 };
 
-export default Footer;
+export default Pagination;

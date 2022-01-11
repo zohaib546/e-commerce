@@ -6,39 +6,22 @@ import { removedFromWishlist } from "../store/wishlistSlice";
 import { addedToCart } from "../store/cartSlice";
 import Banner from "../components/UI/Banner";
 import Button from "./../components/UI/Button";
-import product1 from "../assets/images/product-1.webp";
-import product2 from "../assets/images/product-2.webp";
-import product3 from "../assets/images/product-3.webp";
-import product4 from "../assets/images/product-4.webp";
-import product5 from "../assets/images/product-5.webp";
-import product6 from "../assets/images/product-6.webp";
-import product7 from "../assets/images/product-7.webp";
-import product8 from "../assets/images/product-8.webp";
+import { itemImages } from "../utils/imageData";
 
-const DUMMY_IMAGES = [
-	product1,
-	product2,
-	product3,
-	product4,
-	product5,
-	product6,
-	product7,
-	product8,
-];
+const breadcrumbList = () => ({
+	firstPage: {
+		name: "Home",
+		location: "/",
+	},
+	lastPage: {
+		name: "Wishlist",
+	},
+});
 
 const Wishlist = (props) => {
+	let wishlistContent;
 	const wishlistItems = useSelector((state) => state.wishlist.items);
 	const dispatch = useDispatch();
-
-	const breadcrumbList = () => ({
-		firstPage: {
-			name: "Home",
-			location: "/",
-		},
-		lastPage: {
-			name: "Wishlist",
-		},
-	});
 
 	const handleRemoveFromWishlist = (itemId) => {
 		dispatch(removedFromWishlist({ id: itemId }));
@@ -56,10 +39,8 @@ const Wishlist = (props) => {
 		dispatch(addedToCart({ cartItem }));
 	};
 
-	let cartContent;
-
 	if (wishlistItems.length > 0) {
-		cartContent = (
+		wishlistContent = (
 			<div>
 				<table className="mx-auto min-w-992">
 					<tbody>
@@ -77,7 +58,7 @@ const Wishlist = (props) => {
 							</th>
 							<th className="p-4 text-left"></th>
 						</tr>
-						{wishlistItems.map((item) => (
+						{wishlistItems.map((item, index) => (
 							<tr key={item.id} className="border-b border-gray-300">
 								<td className="p-4 w-10">
 									<button onClick={() => handleRemoveFromWishlist(item.id)}>
@@ -90,7 +71,7 @@ const Wishlist = (props) => {
 								<td className="p-4 w-52">
 									<div>
 										<figure className="">
-											<img className="w-24" src={DUMMY_IMAGES[item.imageId - 1]} alt="product" />
+											<img className="w-24" src={itemImages[index].image} alt={item.title} />
 										</figure>
 									</div>
 								</td>
@@ -113,7 +94,7 @@ const Wishlist = (props) => {
 			</div>
 		);
 	} else {
-		cartContent = <p className="text-center">There are no items in wishlist.</p>;
+		wishlistContent = <p className="text-center">There are no items in wishlist.</p>;
 	}
 
 	return (
@@ -121,7 +102,7 @@ const Wishlist = (props) => {
 			<Banner background="bg-cart" list={breadcrumbList()}>
 				Wishlist
 			</Banner>
-			<div className="container py-20 mx-auto overflow-auto">{cartContent}</div>
+			<div className="container py-20 mx-auto overflow-auto">{wishlistContent}</div>
 		</section>
 	);
 };
