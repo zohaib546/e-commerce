@@ -1,15 +1,12 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-const BreadCrumb = (props) => {
-	const list = props.list;
-
-	let listClasses = `mr-2 text-xs ${
-		props.white ? "text-white" : "text-gray-500"
-	} hover:text-primary`;
-	let lastListClasses = `text-xs ${props.white ? "text-white" : "text-gray-500"}`;
-	let sepratorClasses = `text-xxs ${props.white ? "text-white" : "text-gray-500"}`;
+const BreadCrumb = ({ list, white }) => {
+	let listClasses = `mr-2 text-xs ${white ? "text-white" : "text-gray-500"} hover:text-primary`;
+	let lastListClasses = `text-xs ${white ? "text-white" : "text-gray-500"}`;
+	let sepratorClasses = `text-xxs ${white ? "text-white" : "text-gray-500"}`;
 
 	const content = Object.keys(list).map((li, ind, arr) => {
 		if (ind !== arr.length - 1) {
@@ -30,6 +27,11 @@ const BreadCrumb = (props) => {
 	});
 
 	return <ul className="flex items-center space-x-3">{content}</ul>;
+};
+
+BreadCrumb.propTypes = {
+	list: PropTypes.object.isRequired,
+	white: PropTypes.bool,
 };
 
 export default BreadCrumb;

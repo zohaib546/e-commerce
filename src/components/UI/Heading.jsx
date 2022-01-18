@@ -1,27 +1,33 @@
-const Heading = (props) => {
-	if (props.primary)
+import PropTypes from "prop-types";
+
+const Heading = ({ primary, white, subheadingBlack, subheadingWhite, className, children }) => {
+	if (primary)
 		return (
 			<h1 className="mb-5 text-2xl font-semibold tracking-wide text-center uppercase sm:mb-10 sm:text-5xl">
-				{props.children}
+				{children}
 			</h1>
 		);
 
-	if (props.white)
+	if (white)
 		return (
 			<h1 className="mb-5 text-2xl font-semibold tracking-wide text-center text-white uppercase sm:mb-10 sm:text-5xl">
-				{props.children}
+				{children}
 			</h1>
 		);
-	if (props.subheadingBlack)
-		return (
-			<h1 className={`mb-5 text-xl font-bold uppercase ${props.className}`}>{props.children}</h1>
-		);
+	if (subheadingBlack)
+		return <h1 className={`mb-5 text-xl font-bold uppercase ${className}`}>{children}</h1>;
 
-	if (props.subheadingWhite)
-		return (
-			<h1 className={`mb-5 text-xl font-bold uppercase ${props.className}`}>{props.children}</h1>
-		);
-	return "no props passed";
+	if (subheadingWhite)
+		return <h1 className={`mb-5 text-xl font-bold uppercase ${className}`}>{children}</h1>;
+};
+
+Heading.propTypes = {
+	primary: PropTypes.bool,
+	white: PropTypes.bool,
+	subheadingBlack: PropTypes.bool,
+	subheadingWhite: PropTypes.bool,
+	className: PropTypes.string,
+	children: PropTypes.node.isRequired,
 };
 
 export default Heading;

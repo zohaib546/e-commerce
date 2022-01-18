@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -32,6 +33,11 @@ const WishlistButton = (props) => {
 			/>
 		</button>
 	);
+};
+
+WishlistButton.propTypes = {
+	isActive: PropTypes.bool,
+	onAddWishlist: PropTypes.func,
 };
 
 export default WishlistButton;

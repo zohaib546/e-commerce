@@ -130,7 +130,7 @@ const Product = (props) => {
 
 	if (!loading && error)
 		return (
-			<div className="max-w-2xl mx-auto pt-5">
+			<div className="max-w-2xl pt-5 mx-auto">
 				<Alert danger title="Error" message={error} />
 			</div>
 		);
@@ -194,7 +194,7 @@ const Product = (props) => {
 		);
 
 	return (
-		<div className="max-w-2xl mx-auto pt-5">
+		<div className="max-w-2xl pt-5 mx-auto">
 			<Alert title="Not Found" message="This product is not exist anymore" warning />
 		</div>
 	);

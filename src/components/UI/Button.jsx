@@ -1,80 +1,104 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const Button = (props) => {
-	if (props.roundedWhite)
+	const {
+		roundedBlack,
+		roundedWhite,
+		roundedPrimary,
+		outlinedBlack,
+		outlinedWhite,
+		flatWhite,
+		onClick,
+	} = props;
+
+	const { link, children, url } = props;
+
+	if (roundedWhite)
 		return (
 			<button
-				onClick={props.onClick}
+				onClick={onClick}
 				className="px-4 py-2 text-xs font-light text-black uppercase transition-all bg-white shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:text-white hover:bg-primary"
 			>
-				{props.children}
+				{children}
 			</button>
 		);
 
-	if (props.flatWhite && props.link && props.url)
+	if (flatWhite && link && url)
 		return (
 			<Link
-				to={props.url}
-				onClick={props.onClick}
+				to={url}
+				onClick={onClick}
 				className="absolute px-3 py-2 text-xs font-light uppercase transition-all transform -translate-x-1/2 bg-white shadow-lg sm:px-5 sm:text-base lg:px-10 lg:py-3 hover:bg-primary hover:text-white bottom-5 left-1/2"
 			>
-				{props.children}
+				{children}
 			</Link>
 		);
 
-	if (props.flatWhite)
+	if (flatWhite)
 		return (
 			<button
-				onClick={props.onClick}
+				onClick={onClick}
 				className="absolute px-3 py-2 text-xs font-light uppercase transition-all transform -translate-x-1/2 bg-white shadow-lg sm:px-5 sm:text-base lg:px-10 lg:py-3 hover:bg-primary hover:text-white bottom-5 left-1/2"
 			>
-				{props.children}
+				{children}
 			</button>
 		);
 
-	if (props.roundedBlack)
+	if (roundedBlack)
 		return (
 			<button
 				className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:text-white hover:bg-primary"
-				onClick={props.onClick}
+				onClick={onClick}
 			>
-				{props.children}
+				{children}
 			</button>
 		);
 
-	if (props.roundedPrimary)
+	if (roundedPrimary)
 		return (
 			<button
-				onClick={props.onClick}
+				onClick={onClick}
 				className="px-4 py-2 text-xs font-light text-white uppercase transition-all shadow-xl bg-primary sm:text-base sm:py-3 sm:px-9 rounded-3xl "
 			>
-				{props.children}
+				{children}
 			</button>
 		);
 
-	if (props.outlinedWhite) {
+	if (outlinedWhite) {
 		return (
 			<button
-				onClick={props.onClick}
+				onClick={onClick}
 				className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black border border-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:bg-primary hover:border-white"
 			>
-				{props.children}
+				{children}
 			</button>
 		);
 	}
 
-	if (props.outlinedBlack) {
+	if (outlinedBlack) {
 		return (
 			<button
-				onClick={props.onClick}
+				onClick={onClick}
 				className="px-4 py-2 text-xs font-light text-white uppercase transition-all bg-black border border-black shadow-xl sm:text-base sm:py-3 sm:px-9 rounded-3xl hover:bg-white hover:border-black hover:text-black"
 			>
-				{props.children}
+				{children}
 			</button>
 		);
 	}
+};
 
-	return "no prop found for this element";
+Button.propTypes = {
+	link: PropTypes.bool,
+	url: PropTypes.string,
+	roundedBlack: PropTypes.bool,
+	roundedWhite: PropTypes.bool,
+	roundedPrimary: PropTypes.bool,
+	outlinedBlack: PropTypes.bool,
+	outlinedWhite: PropTypes.bool,
+	flatWhite: PropTypes.bool,
+	onClick: PropTypes.func,
+	children: PropTypes.node.isRequired,
 };
 
 export default Button;
