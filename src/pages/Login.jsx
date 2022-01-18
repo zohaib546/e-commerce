@@ -1,15 +1,25 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router";
+import AuthContext from "./../context/authContext";
 import Banner from "../components/UI/Banner";
 import Button from "./../components/UI/Button";
 import Heading from "./../components/UI/Heading";
 import Input from "./../components/UI/Input";
 
 const Login = (props) => {
+	const authCtx = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const handleRegister = () => {
 		navigate("/register");
 	};
+
+	const handleLogin = (e) => {
+		e.preventDefault();
+		authCtx.loginUser("user");
+		navigate("/");
+	};
+
 	return (
 		<section className="login">
 			<Banner background="bg-promotion">Login</Banner>
@@ -35,7 +45,9 @@ const Login = (props) => {
 							<form className="flex flex-col items-center space-y-6">
 								<Input type="text" placeholder="Username" />
 								<Input type="text" placeholder="Email" />
-								<Button outlinedBlack>login</Button>
+								<Button outlinedBlack onClick={handleLogin}>
+									login
+								</Button>
 							</form>
 						</div>
 					</div>
