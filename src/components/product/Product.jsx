@@ -3,62 +3,38 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { fetchProductById } from "./../../store/productSlice";
+// import { fetchProducts } from "./../../store/productSlice";
 import { addedToCart } from "../../store/cartSlice";
 import {
 	addedToWishlist,
 	removedFromWishlist,
 	selectWishlistItem,
 } from "../../store/wishlistSlice";
+import { itemImages } from "../../utils/imageData";
 import Button from "./../UI/Button";
 import QuantityButton from "./../UI/QuantityButton";
 import WishlistButton from "./../UI/WishlistButton";
 import BreadCrumb from "../UI/BreadCrumb";
 import ProductReview from "./../productReview/ProductReview";
 import FeaturedProducts from "./../../layout/FeaturedProducts";
-import product1 from "../../assets/images/product-1.webp";
-import product2 from "../../assets/images/product-2.webp";
-import product3 from "../../assets/images/product-3.webp";
-import product4 from "../../assets/images/product-4.webp";
-import product5 from "../../assets/images/product-5.webp";
-import product6 from "../../assets/images/product-6.webp";
-import product7 from "../../assets/images/product-7.webp";
-import product8 from "../../assets/images/product-8.webp";
-import Loader from "../UI/Loader";
 import Alert from "../UI/Alert";
-
-const DUMMY_IMAGES = [
-	product1,
-	product2,
-	product3,
-	product4,
-	product5,
-	product6,
-	product7,
-	product8,
-];
+import MainLoader from "./../../pages/MainLoader";
+import { fetchSingleAndLimitedProducts } from "../../store/middleware/api";
 
 const Product = (props) => {
 	const { productId } = useParams();
-	const [loading, setLoading] = useState(false);
-	const [product, setProduct] = useState({});
-	const [error, setError] = useState();
 	const [quantity, setQuantity] = useState(0);
-	const isInWishlist = useSelector((state) => selectWishlistItem(state, Number(productId)));
 	const dispatch = useDispatch();
+	const product = useSelector((state) => state.products.singleItem.item);
+	const products = useSelector((state) => state.products.items);
+	const isLoading = useSelector((state) => state.loading.isLoading);
+	const productError = useSelector((state) => state.products.singleItem.error);
+	const productsError = useSelector((state) => state.products.error);
+	const isInWishlist = useSelector((state) => selectWishlistItem(state, Number(productId)));
 
 	useEffect(() => {
 		if (productId) {
-			setLoading(true);
-			dispatch(fetchProductById(productId))
-				.then((productData) => {
-					setLoading(false);
-					setProduct(productData);
-				})
-				.catch((errorMessage) => {
-					setLoading(false);
-					setError(errorMessage);
-				});
+			dispatch(fetchSingleAndLimitedProducts(productId));
 		}
 	}, [dispatch, productId]);
 
@@ -121,21 +97,9 @@ const Product = (props) => {
 		});
 	};
 
-	if (loading)
-		return (
-			<div className="container mx-auto my-20">
-				<Loader />
-			</div>
-		);
+	if (isLoading) return <MainLoader />;
 
-	if (!loading && error)
-		return (
-			<div className="max-w-2xl pt-5 mx-auto">
-				<Alert danger title="Error" message={error} />
-			</div>
-		);
-
-	if (!loading && !error && product)
+	if (!isLoading && !productError && product)
 		return (
 			<section className="py-10 single-product">
 				<div className="mx-5 mb-5 lg:container lg:mx-auto">
@@ -144,7 +108,7 @@ const Product = (props) => {
 				<div className="max-w-4xl mx-auto ">
 					<div className="grid items-center gap-8 mx-5 lg:mx-0 lg:grid-cols-2">
 						<figure className="overflow-hidden rounded-lg shadow-lg">
-							<img className="w-full" src={DUMMY_IMAGES[productId - 1]} alt={product.title} />
+							<img className="w-full" src={itemImages[productId - 1].image} alt={product.title} />
 						</figure>
 						<div className="px-5">
 							<h1 className="mb-1 text-3xl font-bold">{product.title}</h1>
@@ -187,15 +151,17 @@ const Product = (props) => {
 						</div>
 					</div>
 				</div>
-				<div className="container mx-auto">
-					<FeaturedProducts />
-				</div>
+				{!isLoading && !productsError && products.length > 0 && (
+					<div className="container mx-auto">
+						<FeaturedProducts products={products} />
+					</div>
+				)}
 			</section>
 		);
 
 	return (
 		<div className="max-w-2xl pt-5 mx-auto">
-			<Alert title="Not Found" message="This product is not exist anymore" warning />
+			<Alert title={`Product: ${productId}`} message={productError} warning />
 		</div>
 	);
 };

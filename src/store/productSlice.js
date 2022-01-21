@@ -1,30 +1,41 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { getLimitedProducts, getProduct } from "./../services/productService";
+import { loadingStart, loadingFinished } from "./loadingSlice";
 
 const productSlice = createSlice({
 	name: "products",
 	initialState: {
 		items: [],
-		loading: false,
 		error: null,
+		singleItem: {
+			error: null,
+			item: {},
+		},
 	},
 	reducers: {
-		productsRequested: (products) => {
-			products.loading = true;
+		singleProductRequestSuccess: (products, action) => {
+			products.singleItem.error = null;
+			products.singleItem.item = action.payload.product;
 		},
-		productsReceieved: (products, action) => {
-			products.loading = false;
+		singleProductRequestFailed: (products, action) => {
+			products.singleItem.error = action.payload.error;
+		},
+		productsRequestSuccess: (products, action) => {
 			products.error = null;
-			products.items = action.payload.data;
+			products.items = action.payload.products;
 		},
 		productsRequestFailed: (products, action) => {
-			products.loading = false;
 			products.error = action.payload.error;
 		},
 	},
 });
 
-export const { productsRequested, productsReceieved, productsRequestFailed } = productSlice.actions;
+export const {
+	productsRequestSuccess,
+	productsRequestFailed,
+	singleProductRequestSuccess,
+	singleProductRequestFailed,
+} = productSlice.actions;
 export default productSlice.reducer;
 
 // Selector Functions
@@ -36,11 +47,13 @@ export const selectProducts = createSelector(
 // Thunk Functions
 export const fetchProducts = (limit) => {
 	return async (dispatch, getState) => {
-		dispatch(productsRequested());
+		dispatch(loadingStart());
 		try {
 			const { data } = await getLimitedProducts(limit);
-			dispatch(productsReceieved({ data }));
+			dispatch(loadingFinished());
+			dispatch(productsRequestSuccess({ data }));
 		} catch (error) {
+			dispatch(loadingFinished());
 			dispatch(productsRequestFailed({ error: error.message }));
 		}
 	};
@@ -48,10 +61,13 @@ export const fetchProducts = (limit) => {
 
 export const fetchProductById = (id) => {
 	return async (dispatch, getState) => {
+		dispatch(loadingStart());
 		try {
 			const { data } = await getProduct(id);
+			dispatch(loadingFinished());
 			return data;
 		} catch (error) {
+			dispatch(loadingFinished());
 			return Promise.reject(error.message);
 		}
 	};

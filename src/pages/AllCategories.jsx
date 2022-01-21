@@ -4,7 +4,6 @@ import Widget from "./../layout/Widget";
 import Pagination from "./../components/UI/Pagination";
 import SidebarFilter from "../components/sidebar/SidebarFilter";
 import ProductCard from "../components/product/ProductCard";
-
 import product1 from "../assets/images/product-1.webp";
 import product2 from "../assets/images/product-2.webp";
 import product3 from "../assets/images/product-3.webp";
@@ -113,11 +112,19 @@ const AllCategories = (props) => {
 		/>
 	));
 
+	const list = ["all", "electronics", "jewelery", "men's clothing", "women's clothing"];
+
+	const handleChange = (value) => {
+		console.log(value);
+	};
+
 	return (
 		<section className="categories">
 			<Banner background="bg-banner1">categories</Banner>
 			<Main
-				sidebarContent={<SidebarFilter />}
+				sidebarContent={
+					<SidebarFilter title="Categories" list={list} name="categories" onChange={handleChange} />
+				}
 				headerContent={<Widget />}
 				mainContent={mainContent}
 				footerContent={<Pagination />}

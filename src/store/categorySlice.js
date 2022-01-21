@@ -1,31 +1,25 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { getCategories } from "../services/categoryService";
+import { loadingStart, loadingFinished } from "./loadingSlice";
 
 const categorySlice = createSlice({
 	name: "categories",
 	initialState: {
 		items: [],
-		loading: false,
 		error: null,
 	},
 	reducers: {
-		categoriesRequested: (categories) => {
-			categories.loading = true;
-		},
-		categoriesReceived: (categories, action) => {
-			categories.loading = false;
+		categoriesRequestSuccess: (categories, action) => {
 			categories.error = null;
-			categories.items = action.payload.data;
+			categories.items = action.payload.categories;
 		},
 		categoriesRequestFailed: (categories, action) => {
-			categories.loading = false;
 			categories.error = action.payload.error;
 		},
 	},
 });
 
-export const { categoriesRequested, categoriesReceived, categoriesRequestFailed } =
-	categorySlice.actions;
+export const { categoriesRequestSuccess, categoriesRequestFailed } = categorySlice.actions;
 export default categorySlice.reducer;
 
 // Selector functions
@@ -37,12 +31,14 @@ export const selectCategories = createSelector(
 // Thunk functions
 export const fetchCategories = () => {
 	return async (dispatch, getState) => {
-		dispatch(categoriesRequested());
+		dispatch(loadingStart());
 
 		try {
 			const { data } = await getCategories();
-			dispatch(categoriesReceived({ data }));
+			dispatch(loadingFinished());
+			dispatch(categoriesRequestSuccess({ data }));
 		} catch (error) {
+			dispatch(loadingFinished());
 			dispatch(categoriesRequestFailed({ error: error.message }));
 		}
 	};
