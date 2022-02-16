@@ -1,16 +1,17 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-// import { fetchProducts } from "./../../store/productSlice";
 import { addedToCart } from "../../store/cartSlice";
+import { itemImages } from "../../utils/imageData";
+import { fetchSingleAndFeatureProducts } from "../../store/middleware/api";
+import { singleProductRemoved } from "../../store/productSlice";
 import {
 	addedToWishlist,
 	removedFromWishlist,
 	selectWishlistItem,
 } from "../../store/wishlistSlice";
-import { itemImages } from "../../utils/imageData";
 import Button from "./../UI/Button";
 import QuantityButton from "./../UI/QuantityButton";
 import WishlistButton from "./../UI/WishlistButton";
@@ -19,7 +20,6 @@ import ProductReview from "./../productReview/ProductReview";
 import FeaturedProducts from "./../../layout/FeaturedProducts";
 import Alert from "../UI/Alert";
 import MainLoader from "./../../pages/MainLoader";
-import { fetchSingleAndLimitedProducts } from "../../store/middleware/api";
 
 const Product = (props) => {
 	const { productId } = useParams();
@@ -34,8 +34,12 @@ const Product = (props) => {
 
 	useEffect(() => {
 		if (productId) {
-			dispatch(fetchSingleAndLimitedProducts(productId));
+			dispatch(fetchSingleAndFeatureProducts(productId));
 		}
+
+		return () => {
+			dispatch(singleProductRemoved());
+		};
 	}, [dispatch, productId]);
 
 	const breadcrumbList = () => ({
@@ -99,7 +103,7 @@ const Product = (props) => {
 
 	if (isLoading) return <MainLoader />;
 
-	if (!isLoading && !productError && product)
+	if (!isLoading && !productError && Object.keys(product).length) {
 		return (
 			<section className="py-10 single-product">
 				<div className="mx-5 mb-5 lg:container lg:mx-auto">
@@ -158,11 +162,14 @@ const Product = (props) => {
 				)}
 			</section>
 		);
-
+	}
 	return (
-		<div className="max-w-2xl pt-5 mx-auto">
-			<Alert title={`Product: ${productId}`} message={productError} warning />
-		</div>
+		!isLoading &&
+		productError && (
+			<div className="max-w-2xl pt-5 mx-auto">
+				<Alert title={`Product: ${productId}`} message={productError} warning />
+			</div>
+		)
 	);
 };
 

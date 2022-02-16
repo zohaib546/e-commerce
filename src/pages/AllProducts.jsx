@@ -1,133 +1,105 @@
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategoriesWithProducts } from "./../store/middleware/api";
+import { itemImages } from "./../utils/imageData";
+import MainLoader from "./MainLoader";
 import Banner from "./../components/UI/Banner";
 import Main from "./../layout/Main";
 import Widget from "./../layout/Widget";
 import Pagination from "./../components/UI/Pagination";
 import SidebarFilter from "../components/sidebar/SidebarFilter";
 import ProductCard from "../components/product/ProductCard";
-import product1 from "../assets/images/product-1.webp";
-import product2 from "../assets/images/product-2.webp";
-import product3 from "../assets/images/product-3.webp";
-import product4 from "../assets/images/product-4.webp";
-
-const DUMMY_PRODUCTS = [
-	{
-		id: 1,
-		title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-		price: 109.95,
-		description:
-			"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-		category: "men's clothing",
-		image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-		rating: {
-			rate: 3.9,
-			count: 120,
-		},
-	},
-	{
-		id: 2,
-		title: "Mens Casual Premium Slim Fit T-Shirts ",
-		price: 22.3,
-		description:
-			"Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
-		category: "men's clothing",
-		image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
-		rating: {
-			rate: 4.1,
-			count: 259,
-		},
-	},
-	{
-		id: 3,
-		title: "Mens Cotton Jacket",
-		price: 55.99,
-		description:
-			"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
-		category: "men's clothing",
-		image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-		rating: {
-			rate: 4.7,
-			count: 500,
-		},
-	},
-	{
-		id: 4,
-		title: "Mens Casual Slim Fit",
-		price: 15.99,
-		description:
-			"The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
-		category: "men's clothing",
-		image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
-		rating: {
-			rate: 2.1,
-			count: 430,
-		},
-	},
-	{
-		id: 5,
-		title: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-		price: 695,
-		description:
-			"From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
-		category: "jewelery",
-		image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-		rating: {
-			rate: 4.6,
-			count: 400,
-		},
-	},
-	{
-		id: 6,
-		title: "Solid Gold Petite Micropave ",
-		price: 168,
-		description:
-			"Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
-		category: "jewelery",
-		image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
-		rating: {
-			rate: 3.9,
-			count: 70,
-		},
-	},
-];
-
-const DUMMY_IMAGES = [
-	product1,
-	product2,
-	product3,
-	product4,
-	product1,
-	product2,
-	product3,
-	product4,
-];
+import { calculatePages, getItemsPerPage } from "./../utils/paginate";
 
 const AllProducts = (props) => {
-	const mainContent = DUMMY_PRODUCTS.map((product, index) => (
-		<ProductCard
-			key={product.id}
-			figure={DUMMY_IMAGES[index]}
-			path={`/product/${product.id}`}
-			title={product.title}
-			price={product.price}
-		/>
-	));
+	const [search, setSearch] = useState("");
+	const [filter, setFilter] = useState("all");
+	const [sortBy, setSortBy] = useState("default");
+	const [currentPage, setCurrentPage] = useState(1);
+	const [showProducts, setShowProducts] = useState(6);
+	const isLoading = useSelector((state) => state.loading.isLoading);
+	const allProducts = useSelector((state) => state.products.items);
+	const categories = useSelector((state) => state.categories.items);
+	const categoriesError = useSelector((state) => state.categories.error);
+	const productsError = useSelector((state) => state.products.error);
+	const dispatch = useDispatch();
 
-	const list = ["all", "electronics", "jewelery", "men's clothing", "women's clothing"];
+	useEffect(() => {
+		dispatch(fetchCategoriesWithProducts());
+	}, [dispatch]);
 
-	const handleChange = (value) => {
-		console.log(value);
+	const handleFilter = (value) => {
+		setFilter(value);
 	};
+
+	const handleShow = (value) => {
+		setShowProducts(value);
+	};
+
+	const handleSorting = (value) => {
+		setSortBy(value);
+	};
+
+	const handleSearch = (value) => {
+		setSearch(value);
+	};
+
+	const handlePagination = (index) => {
+		setCurrentPage(index);
+	};
+
+	const headerContent = (
+		<Widget
+			sortBy={sortBy}
+			onSort={handleSorting}
+			showProducts={showProducts}
+			onShow={handleShow}
+			search={search}
+			onSearch={handleSearch}
+		/>
+	);
+
+	const categoriesList = categoriesError ? ["all"] : ["all", ...categories];
+
+	const productsPerPage = getItemsPerPage(allProducts, 6, 12);
+
+	const mainContent = !productsError
+		? productsPerPage.map((product, index) => (
+				<ProductCard
+					key={product.id}
+					figure={itemImages[index].image}
+					path={`/product/${product.id}`}
+					title={product.title}
+					price={product.price}
+				/>
+		  ))
+		: "No Products Found";
+
+	const pages = calculatePages(allProducts.length, 6);
+	const footerContent = allProducts.length > 0 && (
+		<Pagination paginationLength={pages} onClick={handlePagination} currentPage={currentPage} />
+	);
+
+	const sidebarContent = (
+		<SidebarFilter
+			title="Categories"
+			list={categoriesList}
+			name="categories"
+			filterBy={filter}
+			onFilter={handleFilter}
+		/>
+	);
+
+	if (isLoading) return <MainLoader />;
 
 	return (
 		<section className="products">
 			<Banner background="bg-banner1">Products</Banner>
 			<Main
-				sidebarContent={
-					<SidebarFilter title="Categories" list={list} name="categories" onChange={handleChange} />
-				}
-				headerContent={<Widget />}
+				sidebarContent={sidebarContent}
+				headerContent={headerContent}
 				mainContent={mainContent}
-				footerContent={<Pagination />}
+				footerContent={footerContent}
 			/>
 		</section>
 	);

@@ -58,7 +58,7 @@ const ProductCard = (props) => {
 			<figure className="relative mb-2 h-80 sm:h-auto">
 				<img
 					src={props.figure}
-					className="object-cover w-full h-full transition-all filter brightness-100 group-hover:brightness-75"
+					className="object-cover w-full transition-all h-96 filter brightness-100 group-hover:brightness-75"
 					alt={props.title}
 				/>
 				<div className="absolute inset-0 overflow-hidden">

@@ -3,6 +3,10 @@ import http from "./httpService";
 
 const apiEndPoint = apiUrl + "/products";
 
+export function getProducts() {
+	return http.get(apiEndPoint);
+}
+
 export function getLimitedProducts(limit) {
 	return http.get(apiEndPoint + `?limit=${limit}`);
 }

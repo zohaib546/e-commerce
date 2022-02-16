@@ -8,8 +8,8 @@ const productSlice = createSlice({
 		items: [],
 		error: null,
 		singleItem: {
-			error: null,
 			item: {},
+			error: null,
 		},
 	},
 	reducers: {
@@ -19,6 +19,10 @@ const productSlice = createSlice({
 		},
 		singleProductRequestFailed: (products, action) => {
 			products.singleItem.error = action.payload.error;
+		},
+		singleProductRemoved: (products, action) => {
+			products.singleItem.error = null;
+			products.singleItem.item = {};
 		},
 		productsRequestSuccess: (products, action) => {
 			products.error = null;
@@ -35,6 +39,7 @@ export const {
 	productsRequestFailed,
 	singleProductRequestSuccess,
 	singleProductRequestFailed,
+	singleProductRemoved,
 } = productSlice.actions;
 export default productSlice.reducer;
 

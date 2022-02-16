@@ -1,4 +1,4 @@
-import { getLimitedProducts, getProduct } from "../../services/productService";
+import { getLimitedProducts, getProduct, getProducts } from "../../services/productService";
 import { getCategories } from "../../services/categoryService";
 import {
 	productsRequestSuccess,
@@ -43,7 +43,7 @@ export const fetchProductsWithCategories = () => {
 	};
 };
 
-export const fetchSingleAndLimitedProducts = (productId) => {
+export const fetchSingleAndFeatureProducts = (productId) => {
 	return async (dispatch, getState) => {
 		dispatch(loadingStart());
 
@@ -70,10 +70,45 @@ export const fetchSingleAndLimitedProducts = (productId) => {
 			const { data: product } = productData.value;
 			dispatch(singleProductRequestSuccess({ product }));
 
-			if (productsData.status !== "rejected") {
+			if (productsData.status === "fulfilled") {
 				const { data: products } = productsData.value;
 				dispatch(productsRequestSuccess({ products }));
 			}
+		}
+	};
+};
+
+export const fetchCategoriesWithProducts = () => {
+	return async (dispatch, getState) => {
+		dispatch(loadingStart());
+
+		const [categoriesData, productsData] = await Promise.allSettled([
+			getCategories(),
+			getProducts(),
+		]);
+
+		dispatch(loadingFinished());
+
+		if (productsData.status === "rejected") {
+			const { message: error } = productsData.reason;
+			dispatch(apiCallError({ error }));
+			dispatch(productsRequestFailed({ error }));
+		}
+
+		if (categoriesData.status === "rejected") {
+			const { message: error } = categoriesData.reason;
+			dispatch(apiCallError({ error }));
+			dispatch(categoriesRequestFailed({ error }));
+		}
+
+		if (productsData.status === "fulfilled") {
+			const { data: products } = productsData.value;
+			dispatch(productsRequestSuccess({ products }));
+		}
+
+		if (categoriesData.status === "fulfilled") {
+			const { data: categories } = categoriesData.value;
+			dispatch(categoriesRequestSuccess({ categories }));
 		}
 	};
 };
