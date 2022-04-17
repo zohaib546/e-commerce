@@ -112,7 +112,7 @@ const Product = (props) => {
 				<div className="max-w-4xl mx-auto ">
 					<div className="grid items-center gap-8 mx-5 lg:mx-0 lg:grid-cols-2">
 						<figure className="overflow-hidden rounded-lg shadow-lg">
-							<img className="w-full" src={itemImages[productId - 1].image} alt={product.title} />
+							<img className="w-full" src={itemImages[product.id]} alt={product.title} />
 						</figure>
 						<div className="px-5">
 							<h1 className="mb-1 text-3xl font-bold">{product.title}</h1>

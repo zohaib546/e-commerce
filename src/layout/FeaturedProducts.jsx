@@ -13,7 +13,7 @@ const FeaturedProducts = ({ products }) => {
 						<ProductCard
 							key={product.id}
 							id={product.id}
-							figure={itemImages[index].image}
+							figure={itemImages[product.id]}
 							path={`/product/${product.id}`}
 							title={product.title}
 							price={product.price}

@@ -9,7 +9,12 @@ import Widget from "./../layout/Widget";
 import Pagination from "./../components/UI/Pagination";
 import SidebarFilter from "../components/sidebar/SidebarFilter";
 import ProductCard from "../components/product/ProductCard";
-import { calculatePages, getItemsPerPage } from "./../utils/paginate";
+import {
+	calculatePages,
+	getItemsPerPage,
+	getSortItems,
+	getProductsByCategory,
+} from "../utils/utils";
 
 const AllProducts = (props) => {
 	const [search, setSearch] = useState("");
@@ -41,12 +46,18 @@ const AllProducts = (props) => {
 	};
 
 	const handleSearch = (value) => {
-		setSearch(value);
+		setCurrentPage(1);
+		setShowProducts(6);
+		setSortBy("default");
+		setFilter("all");
+		setSearch(value.trimStart());
 	};
 
 	const handlePagination = (index) => {
 		setCurrentPage(index);
 	};
+
+	const categoriesList = categoriesError ? ["all"] : ["all", ...categories];
 
 	const headerContent = (
 		<Widget
@@ -59,27 +70,6 @@ const AllProducts = (props) => {
 		/>
 	);
 
-	const categoriesList = categoriesError ? ["all"] : ["all", ...categories];
-
-	const productsPerPage = getItemsPerPage(allProducts, 6, 12);
-
-	const mainContent = !productsError
-		? productsPerPage.map((product, index) => (
-				<ProductCard
-					key={product.id}
-					figure={itemImages[index].image}
-					path={`/product/${product.id}`}
-					title={product.title}
-					price={product.price}
-				/>
-		  ))
-		: "No Products Found";
-
-	const pages = calculatePages(allProducts.length, 6);
-	const footerContent = allProducts.length > 0 && (
-		<Pagination paginationLength={pages} onClick={handlePagination} currentPage={currentPage} />
-	);
-
 	const sidebarContent = (
 		<SidebarFilter
 			title="Categories"
@@ -88,6 +78,38 @@ const AllProducts = (props) => {
 			filterBy={filter}
 			onFilter={handleFilter}
 		/>
+	);
+
+	const searchProducts =
+		search.length > 0
+			? allProducts.filter((product) =>
+					product.title.toLowerCase().startsWith(search.toLowerCase())
+			  )
+			: allProducts;
+	const productsByCategory = getProductsByCategory(searchProducts, filter);
+	const sortedProducts = getSortItems(productsByCategory, sortBy);
+	const productsPerPage = getItemsPerPage(sortedProducts, currentPage, showProducts);
+
+	const mainContent = !productsError
+		? productsPerPage.map((product, index) => (
+				<ProductCard
+					key={product.id}
+					figure={itemImages[product.id]}
+					path={`/product/${product.id}`}
+					title={product.title}
+					price={product.price}
+				/>
+		  ))
+		: "No Products Found";
+
+	let numberOfItems;
+	if (filter === "all" && search.length > 0) numberOfItems = searchProducts.length;
+	else if (filter === "all") numberOfItems = allProducts.length;
+	else numberOfItems = productsByCategory.length;
+
+	const pages = calculatePages(numberOfItems, showProducts);
+	const footerContent = pages.length > 1 && (
+		<Pagination paginationLength={pages} onClick={handlePagination} currentPage={currentPage} />
 	);
 
 	if (isLoading) return <MainLoader />;

@@ -71,7 +71,7 @@ const Wishlist = (props) => {
 								<td className="p-4 w-52">
 									<div>
 										<figure className="">
-											<img className="w-24" src={itemImages[index].image} alt={item.title} />
+											<img className="w-24" src={itemImages[item.id]} alt={item.title} />
 										</figure>
 									</div>
 								</td>

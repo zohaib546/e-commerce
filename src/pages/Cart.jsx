@@ -8,7 +8,7 @@ import {
 import Banner from "../components/UI/Banner";
 import QuantityButton from "./../components/UI/QuantityButton";
 import Button from "./../components/UI/Button";
-import {itemImages} from "../utils/imageData";
+import { itemImages } from "../utils/imageData";
 
 const breadcrumbList = () => ({
 	firstPage: {
@@ -54,16 +54,12 @@ const Cart = (props) => {
 								<h2>Total</h2>
 							</th>
 						</tr>
-						{cartItems.map((item,index) => (
+						{cartItems.map((item, index) => (
 							<tr key={item.id} className="border-b border-gray-300">
 								<td className="p-4 w-52">
 									<div>
 										<figure className="">
-											<img
-												className="w-24"
-												src={itemImages[index].image}
-												alt={item.title}
-											/>
+											<img className="w-24" src={itemImages[item.id]} alt={item.title} />
 										</figure>
 									</div>
 								</td>
